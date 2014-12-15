@@ -7,7 +7,7 @@
 		function SMTPClient ($SmtpServer, $SmtpPort, $SmtpUser, $SmtpPass, $from, $to, $subject, $body){
 
 			$this->SmtpServer    =   $SmtpServer;
-            $this->PortSMTP      =   $SmtpPort;
+            		$this->PortSMTP      =   $SmtpPort;
 			$this->SmtpUser      =   base64_encode ($SmtpUser);
 			$this->SmtpPass      =   base64_encode ($SmtpPass);
 			$this->from          =   $from;
@@ -23,8 +23,8 @@
 			
 			if ($SMTPIN = fsockopen ($this->SmtpServer, $this->PortSMTP)) {
 		           
-		    	fputs ($SMTPIN, "EHLO ".$_SERVER['HTTP_HOST']."\r\n");  
-		        $talk["hello"] = fgets ( $SMTPIN, 1024 ); 
+			    	fputs ($SMTPIN, "EHLO ".$_SERVER['HTTP_HOST']."\r\n");  
+			        $talk["hello"] = fgets ( $SMTPIN, 1024 ); 
 		                   
 				fputs($SMTPIN, "auth login\r\n");
 				$talk["res"] = fgets($SMTPIN,1024);
@@ -36,12 +36,12 @@
 				$talk["pass"] = fgets($SMTPIN,256);
 
 				fputs ($SMTPIN, "MAIL FROM: <".$this->from.">\r\n");  
-		        $talk["From"] = fgets ( $SMTPIN, 1024 );  
-                
-		        fputs ($SMTPIN, "RCPT TO: <".$this->to.">\r\n");  
-		        $talk["To"] = fgets ($SMTPIN, 1024); 
-		           
-		        fputs($SMTPIN, "DATA\r\n");
+			        $talk["From"] = fgets ( $SMTPIN, 1024 );  
+	                
+			        fputs ($SMTPIN, "RCPT TO: <".$this->to.">\r\n");  
+			        $talk["To"] = fgets ($SMTPIN, 1024); 
+			           
+			        fputs($SMTPIN, "DATA\r\n");
 				$talk["data"] = fgets( $SMTPIN,1024 );
 					
 				//Construct Headers
